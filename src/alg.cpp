@@ -57,6 +57,7 @@ std::string infx2pstfx(std::string inf) {
         stack1.push(inf[i]);
       }
     }
+  }
     while (!stack1.isEmpty()) {
       out.push_back(' ');
       out.push_back(stack1.get());
@@ -80,6 +81,6 @@ int eval(std::string pref) {
     }
   }
   end = stack2.get();
-}
   return end;
 }
+
