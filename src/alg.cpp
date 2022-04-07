@@ -66,7 +66,6 @@ std::string infx2pstfx(std::string inf) {
 }
 
 int eval(std::string pref) {
-  // добавьте код
   int end = 0;
   for (int i = 0; i< pref.size(); i++) {
     if (prior(pref[i]) == 5) {
@@ -82,5 +81,4 @@ int eval(std::string pref) {
   end = stack2.get();
   return end;
 }
-
-  
+}
