@@ -15,13 +15,13 @@ int prior(char pr) {
     default: return 5;
   }
 }
-      
+
 int NCal(char pr, int x, int y) {
   switch (pr) {
     case '+': return (x + y);
     case '-': return (x - y);
     case '*': return (x * y);
-    case '/': 
+    case '/':
       if (y != 0)
         return x / y;
     default: return 0;
@@ -29,17 +29,16 @@ int NCal(char pr, int x, int y) {
 }
 
 std::string infx2pstfx(std::string inf) {
-   
   TStack <char, 100> stack1;
   std::string out;
   for (size_t i = 0; i < inf.size(); ++i) {
-    int pr1 = new prior(inf[i]);
+    int pr1 = prior(inf[i]);
     if (pr1 == 5) {
-      if(!out.empty() && prior(inf[i-1]) != -1){
+      if (!out.empty() && prior(inf[i-1]) != -1) {
         out.push_back(' ');
       }
       out.push_back(inf[i]);
-    } else if (pr1 == 0 || pr1 > prior(srack1.get()) || stack1.isEmpty()) {
+    } else if (pr1 == 0 || pr1 > prior(stack1.get()) || stack1.isEmpty()) {
       stack1.push(inf[i]);
     } else {
       if (pr1 == 1) {
@@ -52,7 +51,7 @@ std::string infx2pstfx(std::string inf) {
       } else {
         while (prior(stack1.get()) >= pr1) {
           out.push_back(' ');
-          out.push_back(stack1.ger());
+          out.push_back(stack1.get());
           stack1.pop();
         }
         stack1.push(inf[i]);
@@ -73,13 +72,15 @@ int eval(std::string pref) {
     if (prior(pref[i]) == 5) {
       stack2.push(pref[i] - '0');
     } else if (prior(pref[i]) < 4) {
-      int x = stack2.get();
-      stack2.pop();
-      int y = stack2.get();
-      stack2.pop();
-      stack2.push(NCal()pref[i], x, y);
+        int x = stack2.get();
+        stack2.pop();
+        int y = stack2.get();
+        stack2.pop();
+        stack2.push(NCal()pref[i], x, y);
     }
   }
   end = stack2.get();
   return end;
 }
+
+  
