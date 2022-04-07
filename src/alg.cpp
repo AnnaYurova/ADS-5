@@ -35,7 +35,11 @@ std::string infx2pstfx(std::string inf) {
     if (prior(inf[i]) == 5) {
         out.push_back(' ');
         out.push_back(inf[i]);
-    } else if (prior(inf[i]) == 0 || prior(inf[i]) > prior(stack1.get()) || stack1.isEmpty()) {
+    } else if (prior(inf[i]) == 0) {
+      stack1.push(inf[i]);
+    } else if (prior(inf[i]) > prior(stack1.get())) {
+        stack1.push(inf[i]);
+    } else if (stack1.isEmpty()) {
       stack1.push(inf[i]);
     } else {
       if (prior(inf[i]) == 1) {
@@ -46,7 +50,7 @@ std::string infx2pstfx(std::string inf) {
         }
         stack1.pop();
       } else {
-        while (!stack1.isEmpty() && prior(inf[i]) <= prior(stack1.get()) {
+        while (!stack1.isEmpty() && prior(inf[i]) <= prior(stack1.get())) {
           out.push_back(' ');
           out.push_back(stack1.get());
           stack1.pop();
