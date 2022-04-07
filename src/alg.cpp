@@ -32,24 +32,21 @@ std::string infx2pstfx(std::string inf) {
   TStack <char, 100> stack1;
   std::string out;
   for (size_t i = 0; i < inf.size(); ++i) {
-    int pr1 = prior(inf[i]);
-    if (pr1 == 5) {
-      if (!out.empty() && prior(inf[i-1]) != -1) {
+    if (prior(inf[i]) == 5) {
         out.push_back(' ');
-      }
-      out.push_back(inf[i]);
-    } else if (pr1 == 0 || pr1 > prior(stack1.get()) || stack1.isEmpty()) {
+        out.push_back(inf[i]);
+    } else if (prior(inf[i]) == 0 || prior(inf[i]) > prior(stack1.get()) || stack1.isEmpty()) {
       stack1.push(inf[i]);
     } else {
-      if (pr1 == 1) {
-        while (stack1.get() != '(') {
+      if (prior(inf[i]) == 1) {
+        while (prior(stack1.get()) != 0) {
           out.push_back(' ');
           out.push_back(stack1.get());
           stack1.pop();
         }
         stack1.pop();
       } else {
-        while (prior(stack1.get()) >= pr1) {
+        while (!stack1.isEmpty() && prior(inf[i]) <= prior(stack1.get()) {
           out.push_back(' ');
           out.push_back(stack1.get());
           stack1.pop();
@@ -62,6 +59,10 @@ std::string infx2pstfx(std::string inf) {
       out.push_back(' ');
       out.push_back(stack1.get());
       stack1.pop();
+    }
+    for (int i = 0; i < out.size(); i++) {
+      if (out[out.size() - 1] == ' ')
+        out.erase(out.size() - 1);
     }
     return out;
     return std::string("");
