@@ -4,7 +4,7 @@
 #include "tstack.h"
 
 int prior(char pr) {
-  switch(pr) {
+  switch (pr) {
     case '(': return 0;
     case ')': return 1;
     case '+': return 2;
@@ -13,6 +13,8 @@ int prior(char pr) {
     case '/': return 3;
     case ' ': return 4;
     default: return 5;
+  }
+}
       
 int NCal(char pr, int x, int y) {
   switch (pr) {
@@ -23,7 +25,8 @@ int NCal(char pr, int x, int y) {
       if (y != 0)
         return x / y;
     default: return 0;
-      
+  }
+}
 
 std::string infx2pstfx(std::string inf) {
    
