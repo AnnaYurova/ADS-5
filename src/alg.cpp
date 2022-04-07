@@ -29,12 +29,12 @@ int NCal(char pr, int x, int y) {
 }
 
 std::string infx2pstfx(std::string inf) {
-  TStack <char, 100> stack1;
   std::string out;
+  char space = ' ';
   for (size_t i = 0; i < inf.size(); ++i) {
     if (prior(inf[i]) == 5) {
-        out.push_back(' ');
         out.push_back(inf[i]);
+        out.push_back(space);
     } else if (prior(inf[i]) == 0) {
       stack1.push(inf[i]);
     } else if (prior(inf[i]) > prior(stack1.get())) {
@@ -44,15 +44,15 @@ std::string infx2pstfx(std::string inf) {
     } else {
       if (prior(inf[i]) == 1) {
         while (prior(stack1.get()) != 0) {
-          out.push_back(' ');
           out.push_back(stack1.get());
+          out.push_back(space);
           stack1.pop();
         }
         stack1.pop();
       } else {
-        while (!stack1.isEmpty() && prior(inf[i]) <= prior(stack1.get())) {
-          out.push_back(' ');
+        while (!stack1.isEmpty() && (prior(inf[i]) <= prior(stack1.get()))) {
           out.push_back(stack1.get());
+          out.push_back(space);
           stack1.pop();
         }
         stack1.push(inf[i]);
@@ -60,8 +60,8 @@ std::string infx2pstfx(std::string inf) {
     }
   }
     while (!stack1.isEmpty()) {
-      out.push_back(' ');
       out.push_back(stack1.get());
+      out.push_back(space);
       stack1.pop();
     }
     for (int i = 0; i < out.size(); i++) {
