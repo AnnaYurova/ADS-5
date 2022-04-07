@@ -63,6 +63,7 @@ std::string infx2pstfx(std::string inf) {
       stack1.pop();
     }
     return out;
+    return std::string("");
 }
 
 int eval(std::string pref) {
@@ -79,6 +80,6 @@ int eval(std::string pref) {
     }
   }
   end = stack2.get();
-  return end;
 }
+  return end;
 }
