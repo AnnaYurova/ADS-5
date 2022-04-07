@@ -77,7 +77,7 @@ int eval(std::string pref) {
         stack2.pop();
         int y = stack2.get();
         stack2.pop();
-        stack2.push(NCal()pref[i], x, y);
+        stack2.push(NCal(pref[i], x, y));
     }
   }
   end = stack2.get();
