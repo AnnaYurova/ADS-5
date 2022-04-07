@@ -72,7 +72,7 @@ int eval(std::string pref) {
   for (int i = 0; i< pref.size(); i++) {
     if (prior(pref[i]) == 5) {
       stack2.push(pref[i] - '0');
-    } else if (prior(pref[i]) < 4) {
+    } else if (prior(pref[i]) < 5) {
         int x = stack2.get();
         stack2.pop();
         int y = stack2.get();
