@@ -9,7 +9,7 @@ class TStack {
     int top;
 
  public:
-    TStack(): top(-1) {}
+    TStack(): top(-1) { }
     T get() {
     if (!isEmpty())
       return arr[top];
@@ -34,5 +34,5 @@ class TStack {
      }
 };
 #endif  // INCLUDE_TSTACK_H_
-TStack<char, 100> stack1;
-TStack<int, 100> stack2;
+TStack<char, 100> stack11;
+TStack<int, 100> stack22;
