@@ -38,17 +38,17 @@ std::string infx2pstfx(std::string inf) {
     } else {
       if (prior(inf[i]) == 0) {
       stack11.push(inf[i]);
-    } else if (prior(inf[i]) > prior(stack1.get())) {
+    } else if (prior(inf[i]) > prior(stack11.get())) {
         stack11.push(inf[i]);
-    } else if (stack1.isEmpty()) {
+    } else if (stack11.isEmpty()) {
       stack11.push(inf[i]);
     } else if (prior(inf[i]) == 1) {
         while (prior(stack11.get()) != 0) {
           out.push_back(stack11.get());
           out.push_back(space);
-          stack1.pop();
+          stack11.pop();
         }
-        stack1.pop();
+        stack11.pop();
       } else {
         while (!stack1.isEmpty() && (prior(inf[i]) <= prior(stack1.get()))) {
           out.push_back(stack11.get());
