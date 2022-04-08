@@ -31,61 +31,60 @@ int NCal(char pr, int x, int y) {
 std::string infx2pstfx(std::string inf) {
   std::string out;
   char space = ' ';
-  for (size_t i = 0; i < inf.size(); ++i) {
+  for (int i = 0; i < inf.size(); i++) {
     if (prior(inf[i]) == 5) {
         out.push_back(inf[i]);
         out.push_back(space);
-    } else if (prior(inf[i]) == 0) {
-      stack1.push(inf[i]);
-    } else if (prior(inf[i]) > prior(stack1.get())) {
-        stack1.push(inf[i]);
-    } else if (stack1.isEmpty()) {
-      stack1.push(inf[i]);
     } else {
-      if (prior(inf[i]) == 1) {
-        while (prior(stack1.get()) != 0) {
-          out.push_back(stack1.get());
+      if (prior(inf[i]) == 0) {
+      stack11.push(inf[i]);
+    } else if (prior(inf[i]) > prior(stack1.get())) {
+        stack11.push(inf[i]);
+    } else if (stack1.isEmpty()) {
+      stack11.push(inf[i]);
+    } else if (prior(inf[i]) == 1) {
+        while (prior(stack11.get()) != 0) {
+          out.push_back(stack11.get());
           out.push_back(space);
           stack1.pop();
         }
         stack1.pop();
       } else {
         while (!stack1.isEmpty() && (prior(inf[i]) <= prior(stack1.get()))) {
-          out.push_back(stack1.get());
+          out.push_back(stack11.get());
           out.push_back(space);
-          stack1.pop();
+          stack11.pop();
         }
-        stack1.push(inf[i]);
+        stack11.push(inf[i]);
       }
     }
   }
-    while (!stack1.isEmpty()) {
-      out.push_back(stack1.get());
+    while (!stack11.isEmpty()) {
+      out.push_back(stack11.get());
       out.push_back(space);
-      stack1.pop();
+      stack11.pop();
     }
     for (int i = 0; i < out.size(); i++) {
       if (out[out.size() - 1] == ' ')
         out.erase(out.size() - 1);
     }
     return out;
-    return std::string("");
 }
 
 int eval(std::string pref) {
   int end = 0;
   for (int i = 0; i< pref.size(); i++) {
     if (prior(pref[i]) == 5) {
-      stack2.push(pref[i] - '0');
+      stack22.push(pref[i] - '0');
     } else if (prior(pref[i]) < 5) {
-        int x = stack2.get();
-        stack2.pop();
-        int y = stack2.get();
-        stack2.pop();
-        stack2.push(NCal(pref[i], x, y));
+        int x = stack22.get();
+        stack22.pop();
+        int y = stack22.get();
+        stack22.pop();
+        stack22.push(NCal(pref[i], x, y));
     }
   }
-  end = stack2.get();
+  end = stack22.get();
   return end;
 }
 
