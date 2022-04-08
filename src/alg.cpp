@@ -11,8 +11,8 @@ int prior(char pr) {
     case '-': return 2;
     case '*': return 3;
     case '/': return 3;
-    case ' ': return 4;
-    default: return 5;
+    case ' ': return 5;
+    default: return 4;
   }
 }
 
@@ -74,9 +74,9 @@ std::string infx2pstfx(std::string inf) {
 int eval(std::string pref) {
   int end = 0;
   for (int i = 0; i< pref.size(); i++) {
-    if (prior(pref[i]) == 5) {
+    if (prior(pref[i]) == 4) {
       stack22.push(pref[i] - '0');
-    } else if (prior(pref[i]) < 5) {
+    } else if (prior(pref[i]) < 4) {
         int x = stack22.get();
         stack22.pop();
         int y = stack22.get();
