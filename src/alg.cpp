@@ -18,41 +18,41 @@ int prior(char pr) {
 
 int NCal(char pr, int x, int y) {
   switch (pr) {
-    case '+': return (x + y);
-    case '-': return (x - y);
-    case '*': return (x * y);
+    case '+': return (y + x);
+    case '-': return (y - x);
+    case '*': return (y * x);
     case '/':
-      if (y != 0)
-        return x / y;
+      if (x != 0)
+        return y / x;
     default: return 0;
   }
 }
 
 std::string infx2pstfx(std::string inf) {
-  std::string out;
+  std::string outl;
   char space = ' ';
   for (int i = 0; i < inf.size(); i++) {
-    if (prior(inf[i]) == 5) {
-        out.push_back(inf[i]);
-        out.push_back(space);
+    if (prior(inf[i]) == 4) {
+        outl.push_back(inf[i]);
+        outl.push_back(space);
     } else {
       if (prior(inf[i]) == 0) {
       stack11.push(inf[i]);
-    } else if (prior(inf[i]) > prior(stack11.get())) {
-        stack11.push(inf[i]);
     } else if (stack11.isEmpty()) {
+        stack11.push(inf[i]);
+    } else if (prior(inf[i]) > prior(stack11.get())) {
       stack11.push(inf[i]);
     } else if (prior(inf[i]) == 1) {
         while (prior(stack11.get()) != 0) {
-          out.push_back(stack11.get());
-          out.push_back(space);
+          outl.push_back(stack11.get());
+          outl.push_back(space);
           stack11.pop();
         }
         stack11.pop();
       } else {
         while (!stack11.isEmpty() && (prior(inf[i]) <= prior(stack11.get()))) {
-          out.push_back(stack11.get());
-          out.push_back(space);
+          outl.push_back(stack11.get());
+          outl.push_back(space);
           stack11.pop();
         }
         stack11.push(inf[i]);
@@ -60,19 +60,19 @@ std::string infx2pstfx(std::string inf) {
     }
   }
     while (!stack11.isEmpty()) {
-      out.push_back(stack11.get());
-      out.push_back(space);
+      outl.push_back(stack11.get());
+      outl.push_back(space);
       stack11.pop();
     }
-    for (int i = 0; i < out.size(); i++) {
-      if (out[out.size() - 1] == ' ')
-        out.erase(out.size() - 1);
+    for (int i = 0; i < outl.size(); i++) {
+      if (outl[outl.size() - 1] == ' ')
+        outl.erase(outl.size() - 1);
     }
-    return out;
+    return outl;
 }
 
 int eval(std::string pref) {
-  int end = 0;
+  int endl = 0;
   for (int i = 0; i< pref.size(); i++) {
     if (prior(pref[i]) == 4) {
       stack22.push(pref[i] - '0');
@@ -84,7 +84,7 @@ int eval(std::string pref) {
         stack22.push(NCal(pref[i], x, y));
     }
   }
-  end = stack22.get();
-  return end;
+  endl = stack22.get();
+  return endl;
 }
 
